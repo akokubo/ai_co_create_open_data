@@ -14,10 +14,12 @@ git clone https://github.com/akokubo/ai_co_create_open_data_hachinohe.git
 cd ai_co_create_open_data_hachinohe
 python -m venv venv
 source venv/bin/activate
-pip install --upgrade pip
-pip install openpyxl pandas ollama streamlit
+python -m pip install --upgrade pip
+python -m pip install openpyxl pandas ollama streamlit
 mkdir data
 ```
+※Windowsの場合、WSL2などからご利用ください
+
 ※仮想環境は、condaなどでもいい。
 
 ## データの取得
@@ -32,11 +34,18 @@ mkdir data
 ```
 ollama pull hf.co/rinna/deepseek-r1-distill-qwen2.5-bakeneko-32b-gguf:latest
 ```
-※ PCのスペックに合わせて大規模言語モデルは選ぶ必要がある。デフォルトの設定のモデルは12GB程度あるので、PCのスペックが必要。小さいモデルには、たとえば2.8GBの lucas2024/gemma-2-2b-jpn-it:q8_0 などがある。別のモデルを使うときは、app.pyの96行目を書き換える。
+※ PCのスペックに合わせて大規模言語モデルは選ぶ必要がある。デフォルトで指定しているモデルは12GB程度あるので、PCのスペックが必要になる。小さいモデルには、たとえば2.8GBの lucas2024/gemma-2-2b-jpn-it:q8_0 などがある。別のモデルを使うときは、モデルをpullして、app.pyの96行目を書き換える。
 
 ## 実行
+最初に、プログラムを展開したフォルダに入る。
+次に仮想環境に入っていない場合(コマンドプロンプトに(venv)と表示されていないとき)、仮想環境に入る。
 ```
-streamlit run app.py
+source venv/bin/activate
+```
+
+仮想環境に入っている状態で、以下のコマンドでアプリを起動する。
+```
+python -m streamlit run app.py
 ```
 
 ## 作者
