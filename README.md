@@ -13,6 +13,17 @@
 2. PDFは[MarkItDown](https://github.com/microsoft/markitdown)でMarkdownに変換(拡張子md)。
 3. データ名、データの種類(csv、excel、md)、ファイル名、URL(実際には使用しない)からなるdata/opendata.xlsxを作る
 
+## Ollamaの準備
+1. Ollamaを[ダウンロード](https://ollama.com/download/windows)してインストール
+2. Ollamaでrinna/deepseek-r1-distill-qwen2.5-bakeneko-32b-gguf:latestをpullする。
+```
+ollama pull hf.co/rinna/deepseek-r1-distill-qwen2.5-bakeneko-32b-gguf:latest
+```
+
+## Pythonライブラリのインストール
+1. [仮想環境を作る](https://docs.python.org/ja/3.11/library/venv.html)
+2. Pandas、Ollama Python Library、Streamlitライブラリをpip installなどでインストール
+
 ## 実行
 ```
 streamlit run app.py
