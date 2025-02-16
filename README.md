@@ -28,11 +28,11 @@ mkdir data
 
 ## Ollamaの準備
 1. Ollamaを[ダウンロード](https://ollama.com/download/windows)してインストール
-2. Ollamaで大規模言語モデルのrinna/deepseek-r1-distill-qwen2.5-bakeneko-32b-gguf:latestをpullする。
+2. Ollamaで大規模言語モデルの hf.co/rinna/deepseek-r1-distill-qwen2.5-bakeneko-32b-gguf:latest をpullする。
 ```
 ollama pull hf.co/rinna/deepseek-r1-distill-qwen2.5-bakeneko-32b-gguf:latest
 ```
-※ PCのスペックに合わせて大規模言語モデルは選ぶ必要がある。小さいモデルには、たとえば lucas2024/gemma-2-2b-jpn-it などがある。別のモデルを使うときは、app.pyの96行目を書き換える。
+※ PCのスペックに合わせて大規模言語モデルは選ぶ必要がある。デフォルトの設定のモデルは12GB程度あるので、PCのスペックが必要。小さいモデルには、たとえば2.8GBの lucas2024/gemma-2-2b-jpn-it:q8_0 などがある。別のモデルを使うときは、app.pyの96行目を書き換える。
 
 ## 実行
 ```
