@@ -2,6 +2,9 @@
 
 ![生成AIで「×(カケ)る」八戸オープンデータ](images/ai_co_create_open_data_hachinohe.png)
 
+## 説明資料
+[説明資料](https://github.com/akokubo/ai_co_create_open_data_hachinohe/blob/main/docs/ai_co_create_open_data_hachinohe.pdf)
+
 ## 使用したもの
 * [Streamlit](https://streamlit.io/)
 * [Ollama](https://ollama.com/)
@@ -12,13 +15,13 @@
 ```
 git clone https://github.com/akokubo/ai_co_create_open_data_hachinohe.git
 cd ai_co_create_open_data_hachinohe
-python -m venv venv
+python3 -m venv venv
 source venv/bin/activate
-python -m pip install --upgrade pip
-python -m pip install openpyxl pandas ollama streamlit
+python3 -m pip install --upgrade pip
+python3 -m pip install openpyxl pandas ollama streamlit
 mkdir data
 ```
-※Windowsの場合、WSL2などからご利用ください
+※Windowsの場合、WSL2の[新しいもの](https://github.com/microsoft/WSL/releases/)をインストールし、アップデート&アップグレードし、python3-pipやpython3.12-venvなどなどをインストールしてからご利用ください。
 
 ※仮想環境は、condaなどでもいい。
 
@@ -28,13 +31,17 @@ mkdir data
 3. データ名、データの種類(csv、excel、md)、ファイル名(data/からはじまる)、URL(実際には使用しない)からなるdata/opendata.xlsxを作る
 ![data/opendata.xlsxの例](images/opendata.xlsx.png)
 
+※八戸市のオープンデータに限らず利用できる。
+
 ## Ollamaの準備
-1. Ollamaを[ダウンロード](https://ollama.com/download/windows)してインストール
+1. Ollamaをインストール
+   - Windowsの場合は、WSL2で仮想環境から `curl -fsSL https://ollama.com/install.sh | sh` でインストール
+   - Macの場合は、[ダウンロード](https://ollama.com/download/windows)してインストール
 2. Ollamaで大規模言語モデルの hf.co/rinna/deepseek-r1-distill-qwen2.5-bakeneko-32b-gguf:latest をpullする。
 ```
 ollama pull hf.co/rinna/deepseek-r1-distill-qwen2.5-bakeneko-32b-gguf:latest
 ```
-※ PCのスペックに合わせて大規模言語モデルは選ぶ必要がある。デフォルトで指定しているモデルは12GB程度あるので、PCのスペックが必要になる。小さいモデルには、たとえば2.8GBの lucas2024/gemma-2-2b-jpn-it:q8_0 などがある。別のモデルを使うときは、モデルをpullして、app.pyの96行目を書き換える。
+※PCのスペックに合わせて大規模言語モデルは選ぶ必要がある。デフォルトで指定しているモデルは12GB程度あるので、PCのスペックが必要になる。小さいモデルには、たとえば2.8GBの lucas2024/gemma-2-2b-jpn-it:q8_0 などがある。別のモデルを使うときは、そのモデルをpullして、app.pyの96行目を書き換える。
 
 ## 実行
 最初に、プログラムを展開したフォルダに入る。
@@ -43,9 +50,14 @@ ollama pull hf.co/rinna/deepseek-r1-distill-qwen2.5-bakeneko-32b-gguf:latest
 source venv/bin/activate
 ```
 
+Ollamaが起動していないかもしれないので、仮想環境に入っている状態で、大規模言語モデルのリストを表示する(すると起動していなければ、起動する)。
+```
+ollama list
+```
+
 仮想環境に入っている状態で、以下のコマンドでアプリを起動する。
 ```
-python -m streamlit run app.py
+python3 -m streamlit run app.py
 ```
 
 ## 作者
