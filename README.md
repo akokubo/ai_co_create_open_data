@@ -31,17 +31,17 @@ mkdir data
 3. データ名、データの種類(csv、excel、md)、ファイル名(data/からはじまる)、URL(実際には使用しない)からなるdata/opendata.xlsxを作る
 ![data/opendata.xlsxの例](images/opendata.xlsx.png)
 
-※八戸市のオープンデータに限らず利用できる。
+※プログラムには八戸市のオープンデータ向けのプロンプトを書いているが、プロンプト部分を書き換えれば八戸市のオープンデータに限らず利用できる。
 
 ## Ollamaの準備
 1. Ollamaをインストール
    - Windowsの場合は、WSL2で仮想環境から `curl -fsSL https://ollama.com/install.sh | sh` でインストール
    - Macの場合は、[ダウンロード](https://ollama.com/download/windows)してインストール
-2. Ollamaで大規模言語モデルの hf.co/rinna/deepseek-r1-distill-qwen2.5-bakeneko-32b-gguf:latest をpullする。
+2. Ollamaで大規模言語モデルの `hf.co/rinna/deepseek-r1-distill-qwen2.5-bakeneko-32b-gguf:latest` をpullする。
 ```
 ollama pull hf.co/rinna/deepseek-r1-distill-qwen2.5-bakeneko-32b-gguf:latest
 ```
-※PCのスペックに合わせて大規模言語モデルは選ぶ必要がある。デフォルトで指定しているモデルは12GB程度あるので、PCのスペックが必要になる。小さいモデルには、たとえば2.8GBの lucas2024/gemma-2-2b-jpn-it:q8_0 などがある。別のモデルを使うときは、そのモデルをpullして、app.pyの96行目を書き換える。
+※PCのスペックに合わせて大規模言語モデルは選ぶ必要がある。デフォルトで指定しているモデルは12GB程度あるので、PCのスペックが必要になる。小さいモデルには、たとえば2.8GBの `lucas2024/gemma-2-2b-jpn-it:q8_0` などがある。別のモデルを使うときは、そのモデルをpullして、app.pyの1行目を書き換える。
 
 ## 実行
 最初に、プログラムを展開したフォルダに入る。
