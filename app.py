@@ -1,14 +1,19 @@
-MODEL = 'hf.co/rinna/deepseek-r1-distill-qwen2.5-bakeneko-32b-gguf:latest'
-BASE_URL = 'http://localhost:11434/v1'
-OPENAI_API_KEY = 'ollama'
+MODEL = "hf.co/rinna/deepseek-r1-distill-qwen2.5-bakeneko-32b-gguf:latest"
+BASE_URL = "http://localhost:11434/v1"
+OPENAI_API_KEY = "ollama" # 指定はするが、実際には使用しない
 
 import os
-import streamlit as st
 import pandas as pd
+
 # LangChain関連のモジュール（チャットモデル、メッセージ形式、コールバックハンドラ）
-from langchain.chat_models import ChatOpenAI
+from langchain_openai import ChatOpenAI
 from langchain.schema import SystemMessage, HumanMessage
 from langchain.callbacks.base import BaseCallbackHandler
+
+import streamlit as st
+import warnings
+# Streamlitでヘッダーとフッターが解析できない警告を無視
+warnings.filterwarnings("ignore", message="Cannot parse header or footer so it will be ignored")
 
 # -----------------------------------------------------------------------------
 # ストリーミング用のコールバックハンドラ
@@ -34,7 +39,7 @@ class StreamlitCallbackHandler(BaseCallbackHandler):
 # -----------------------------------------------------------------------------
 @st.cache_data(show_spinner=False)
 def load_open_data():
-    # 'data/opendata.xlsx'からデータを読み込み
+    # "data/opendata.xlsx"からデータを読み込み
     opendata_df = pd.read_excel("data/opendata.xlsx")
     data_dict = {}
     # Excelファイルの各行を処理
@@ -79,13 +84,13 @@ def build_prompt(user_input, selected_data):
     lines.append("----")
     lines.append("以上は、八戸市のオープンデータです。")
     lines.append("")
-    lines.append("# 依頼")
+    lines.append("# ユーザーの質問")
     # ユーザーからの質問を追加
     lines.append(user_input)
     lines.append("")
     lines.append("# 依頼")
     # 生成AIへの具体的な指示（ステップバイステップで考えて回答するよう依頼）
-    lines.append("ステップバイステップで考えて、回答してください。")
+    lines.append("ユーザーの質問にステップバイステップで考えて、回答してください。")
     lines.append("回答する前に回答を見直しして改善してから、回答してください。")
     
     # リスト化された行を1つのテキストに結合
@@ -122,7 +127,7 @@ def main():
     # -----------------------------------------------------------------------------
     # サイドバーの設定：画像表示とオープンデータの選択
     # -----------------------------------------------------------------------------
-    st.sidebar.image("images/ai_co_create_open_data_hachinohe.png", width=200)
+    st.sidebar.image("images/ai_co_create_open_data_hachinohe.png", use_container_width=True)
     st.sidebar.title("使用するオープンデータ")
     
     # Excelからオープンデータを読み込む
@@ -189,12 +194,12 @@ def main():
                         model_name=MODEL,
                         streaming=True,
                         callbacks=[callback_handler],
-                        temperature=0,
+                        temperature=0.6,
                         base_url=BASE_URL,
                         openai_api_key=OPENAI_API_KEY,
                     )
                     # プロンプトメッセージを渡してモデルから応答を受信
-                    response = chat_model(messages)
+                    response = chat_model.invoke(messages)
                     # 完全な応答テキストを取得
                     assistant_response = response.content
                     # チャット履歴にアシスタントの応答を記録
