@@ -34,7 +34,7 @@ class StreamlitCallbackHandler(BaseCallbackHandler):
         self.placeholder.markdown(self.full_response)
 
 # -----------------------------------------------------------------------------
-# Excelからオープンデータを読み込む関数
+# Excelファイルのデータを見てオープンデータを読み込む関数
 # Streamlitのキャッシュ機能を利用して、読み込みを効率化
 # -----------------------------------------------------------------------------
 @st.cache_data(show_spinner=False)
