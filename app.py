@@ -51,14 +51,14 @@ def load_open_data():
         # カレントディレクトリとファイル名を結合して、ファイルパスを生成
         file_path = os.path.join(os.getcwd(), str(file_name))
         try:
-            # CSV形式の場合：cp932エンコーディングで読み込み、先頭部分を辞書に変換
+            # CSV形式の場合：cp932エンコーディングで読み込み、転置して辞書に変換
             if data_type == "csv":
                 df = pd.read_csv(file_path, encoding="cp932")
-                data_content = df.head().to_dict()
-            # Excel形式の場合：先頭部分を辞書に変換
+                data_content = df.T.to_dict()
+            # Excel形式の場合：、転置して辞書に変換
             elif data_type == "excel":
                 df = pd.read_excel(file_path)
-                data_content = df.head().to_dict()
+                data_content = df.T.to_dict()
             # Markdown形式の場合：ファイル内容をそのままテキストとして読み込み
             elif data_type == "md":
                 with open(file_path, "r", encoding="utf-8") as f:
