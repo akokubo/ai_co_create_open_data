@@ -7,6 +7,7 @@
 
 ## 使用したもの
 * [Streamlit](https://streamlit.io/)
+* [LangChain](https://www.langchain.com/)
 * [Ollama](https://ollama.com/)
 * https://huggingface.co/rinna/deepseek-r1-distill-qwen2.5-bakeneko-32b-gguf
 * [八戸市オープンデータ](https://www.city.hachinohe.aomori.jp/gyoseijoho/tokeijoho/opendata/)
@@ -18,7 +19,7 @@ cd ai_co_create_open_data_hachinohe
 python3 -m venv venv
 source venv/bin/activate
 python3 -m pip install --upgrade pip
-python3 -m pip install openpyxl pandas ollama streamlit
+python3 -m pip install openpyxl pandas ollama streamlit langchain langchain-openai
 mkdir data
 ```
 ※Windowsの場合、WSL2の[新しいもの](https://github.com/microsoft/WSL/releases/)をインストールし、アップデート&アップグレードし、python3-pipやpython3.12-venvなどなどをインストールしてからご利用ください。
